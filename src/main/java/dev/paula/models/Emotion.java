@@ -12,7 +12,7 @@ public enum Emotion {
     ABURRIMIENTO("Aburrimiento"),
     NOSTALGIA("Nostalgia");
 
-    String name;
+    private final String name;
 
     Emotion(String string) {
         name = string;
