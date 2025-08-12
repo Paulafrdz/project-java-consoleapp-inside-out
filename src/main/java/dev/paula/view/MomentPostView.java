@@ -8,7 +8,7 @@ public class MomentPostView extends View{
 
     public static void printStoreMenu() {
         System.out.println("Ingrese el título:");
-        String momentTitle = SCANNER.nextLine();
+        String title = SCANNER.nextLine();
 
 
         Date inputDate = null;

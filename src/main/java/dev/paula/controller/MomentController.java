@@ -1,7 +1,7 @@
 package dev.paula.controller;
 
 import dev.paula.dtos.MomentDTO;
-import dev.paula.mappers.CharacterMapper;
+import dev.paula.mappers.MomentMapper;
 import dev.paula.models.Moment;
 import dev.paula.repository.MomentRepository;
 import dev.paula.singletons.MomentRepositorySingleton;

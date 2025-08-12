@@ -1,0 +1,12 @@
+package dev.paula.mappers;
+
+import dev.paula.dtos.MomentDTO;
+import dev.paula.models.Moment;
+
+public class MomentMapper {
+    public static Moment toEntity(MomentDTO dto) {
+        
+        Moment moment = new Moment(dto.id(), dto.title(),dto.description(),dto.emotion(),dto.dateOfMoment());
+        return moment;
+    }
+}
