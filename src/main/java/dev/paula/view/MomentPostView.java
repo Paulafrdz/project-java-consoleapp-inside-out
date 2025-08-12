@@ -22,8 +22,8 @@ public class MomentPostView extends View{
         } catch (ParseException e) {
             System.out.println("Fecha inválida. Intente de nuevo.");
         }
-    };
-
+        };
+        
     
     }
 }
