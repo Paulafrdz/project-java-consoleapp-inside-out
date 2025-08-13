@@ -58,6 +58,9 @@ public class MomentPostView extends View{
         MomentDTO moment = new MomentDTO(0, title, description, emotion, date);
         CONTROLLER.StoreMoment(moment);
 
+        System.out.println("Momento vivído añadido correctamente.");
+
+        HomeView.printMenu();
     }
     
     
