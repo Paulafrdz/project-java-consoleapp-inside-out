@@ -1,25 +1,27 @@
 package dev.paula.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 
 public class Moment {
+    private static int nextId=1;
+
     private final int id;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
-    private LocalDate dateOfMoment;
+    private Date date;
     private String title;
     private String description;
     private Emotion emotion;
 
-    public Moment(int id, String title, String description, Emotion emotion, LocalDate dateOfMoment) {
-        this.id = id;
+    public Moment(int id, String title, String description, Emotion emotion, Date date) {
+        this.id = nextId;
         this.title = title;
         this.description = description;
         this.emotion = emotion;
-        this.dateOfMoment = dateOfMoment;
-        this.createdAt = LocalDateTime.now();
-        this.modifiedAt = LocalDateTime.now();
+        this.date = date;
+        
     }
 
     public int getId() {
@@ -38,8 +40,8 @@ public class Moment {
         return emotion;
     }
 
-    public LocalDate getDateOfMoment() {
-        return dateOfMoment;
+    public Date getdate() {
+        return date;
     }
 
     public LocalDateTime getCreatedAt(){
@@ -70,6 +72,6 @@ public class Moment {
     @Override
     public String toString() {
         return "ID: " + id + ", Título: " + title + ", Emoción: " + emotion.getName() + 
-               ", Fecha: " + dateOfMoment + ", Descripción: " + description;
+               ", Fecha: " + date + ", Descripción: " + description;
     }
 }
