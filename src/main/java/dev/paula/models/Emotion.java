@@ -1,25 +1,26 @@
 package dev.paula.models;
 
 public enum Emotion {
-    ALEGRIA("Alegría"),
-    TRISTEZA("Tristeza"),
-    IRA("Ira"),
-    ASCO("Asco"),
-    MIEDO("Miedo"),
-    ANSIEDAD("Ansiedad"),
-    ENVIDIA("Envidia"),
-    VERGUENZA("Vergüenza"),
-    ABURRIMIENTO("Aburrimiento"),
-    NOSTALGIA("Nostalgia");
+    ALEGRIA(1),
+    TRISTEZA( 2),
+    IRA(3),
+    ASCO(4),
+    MIEDO(5),
+    ANSIEDAD(6),
+    ENVIDIA(7),
+    VERGUENZA(8),
+    ABURRIMIENTO(9),
+    NOSTALGIA(10);
 
-    private final String name;
+    private int numberEmotion;
+    public int getnumberEmotion() {
+        return numberEmotion;
+    }
 
-    Emotion(String string) {
-        name = string;
+    Emotion(int numberEmotion) {
+        this.numberEmotion = numberEmotion;
     }
-    public String getName() {
-        return name;
-    }
+
 }
 
 

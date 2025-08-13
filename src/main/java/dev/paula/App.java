@@ -2,9 +2,7 @@ package dev.paula;
 
 import dev.paula.controller.HomeController;
 
-/**
- * Hello world!
- */
+
 public final class App {
     private App() {
     }

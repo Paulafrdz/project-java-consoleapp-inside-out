@@ -16,7 +16,7 @@ public class Moment {
     private Emotion emotion;
 
     public Moment(int id, String title, String description, Emotion emotion, Date date) {
-        this.id = nextId;
+        this.id = nextId++;
         this.title = title;
         this.description = description;
         this.emotion = emotion;
@@ -71,7 +71,7 @@ public class Moment {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Título: " + title + ", Emoción: " + emotion.getName() + 
+        return "ID: " + id + ", Título: " + title + ", Emoción: " + emotion.getnumberEmotion() + 
                ", Fecha: " + date + ", Descripción: " + description;
     }
 }
