@@ -32,5 +32,11 @@ public class MomentController {
             MomentsDTO.add(new MomentDTOResponse(moment.getId(), moment.getTitle(), moment.getDescription(), moment.getEmotion(), moment.getdate()));
         }
         MomentGetView.printAllMoments(MomentsDTO);
+
+    }
+
+    public void deleteMoment(int id){
+        repository.deleteMoment(id);
+        System.out.println("Momento vivído eliminado correctamente.");
     }
 }

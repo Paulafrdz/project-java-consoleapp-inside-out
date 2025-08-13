@@ -20,4 +20,8 @@ public class MomentDataBase implements InterfaceDatabase{
     public List<Moment> getAll() {
         return moments;
     }
+
+    public void deleteById(int id) {
+        moments.removeIf(moment -> moment.getId() == id);
+    }
 }
