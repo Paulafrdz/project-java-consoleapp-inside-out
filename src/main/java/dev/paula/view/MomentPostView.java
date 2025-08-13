@@ -13,6 +13,9 @@ public class MomentPostView extends View{
     private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printStoreMenu() {
+
+        SCANNER.nextLine();
+
         System.out.println("Ingrese el título:");
         String title = SCANNER.nextLine();
 
