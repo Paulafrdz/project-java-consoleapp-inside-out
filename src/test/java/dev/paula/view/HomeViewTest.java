@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
 
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -17,17 +18,17 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-public class MomentFilterViewTest {
+public class HomeViewTest {
     
     private final InputStream inputPInputStream = System.in;
     private final PrintStream printStream = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    private MockedStatic<MomentFilterEmotionView> mockedPostView;
+    private MockedStatic<MomentPostView> mockedPostView;
 
     @BeforeEach
     void setUp(){
-        mockedPostView = mockStatic(MomentFilterEmotionView.class);
+        mockedPostView = mockStatic(MomentPostView.class);
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
@@ -37,21 +38,21 @@ public class MomentFilterViewTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         View.SCANNER = new Scanner(System.in);
-        MomentFilterView.printFilterMenu();
+        HomeView.printMenu();
 
-        String output = outputStreamCaptor.toString().replace("\r", "");
-        assertThat(output, containsString("Ingrese una opción:"));
+         String output = outputStreamCaptor.toString().replace("\r", "");
+        assertThat(output, containsString("Seleccione una opción:"));
  
     }
 
     @Test
     void givenStaticMockRegistration_whenMocked_thenReturnsMockSuccessfully(){
-        assertTrue(Mockito.mockingDetails(MomentFilterEmotionView.class).isMock());
+        assertTrue(Mockito.mockingDetails(MomentPostView.class).isMock());
     }
 
     @Test
     public void givenAnotherStaticMockRegistration_whenMocked_thenReturnsMockSuccessfully(){
-        assertTrue(Mockito.mockingDetails(MomentFilterEmotionView.class).isMock());
+        assertTrue(Mockito.mockingDetails(MomentPostView.class).isMock());
     }
 
     @AfterEach

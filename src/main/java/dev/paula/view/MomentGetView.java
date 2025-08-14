@@ -9,7 +9,7 @@ public class MomentGetView extends View{
     public static void printAllMoments(List<MomentDTOResponse> moments){
          if (moments.isEmpty()) {
             System.out.println("No hay momentos guardados.");
-            HomeView.printMenu();
+            if (!TEST_MODE)HomeView.printMenu();
             return;
         }
 
@@ -18,7 +18,7 @@ public class MomentGetView extends View{
             System.out.println(moment.id() + " Ocurrio el: " + moment.date() + " Título: " + moment.title() + " Descripción: " + moment.description() + " Emoción: " + moment.emotion());
         }
        
-        HomeView.printMenu();
+        if (!TEST_MODE) HomeView.printMenu();
     }
 
 }

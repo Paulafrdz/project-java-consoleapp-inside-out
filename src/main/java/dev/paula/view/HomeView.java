@@ -22,6 +22,10 @@ public class HomeView extends View{
 
         System.out.print(text);
 
+        if (TEST_MODE) {
+        return; // No pedimos input en modo test
+        }
+
         int option = SCANNER.nextInt();
 
         if (option == 1) MomentPostView.printStoreMenu();

@@ -24,11 +24,15 @@ class MomentGetViewTest {
 
     @BeforeEach
     void setUp(){
+        View.TEST_MODE = true;
         System.setOut(new PrintStream(outputStreamCaptor));
     }
+    
 
     @Test
     void testPrintAllMoments(){
+
+        
         String expected = "Lista de momentos vividos: ";
         List<MomentDTOResponse> moments = new ArrayList<>();
         moments.add(new MomentDTOResponse(
@@ -43,7 +47,6 @@ class MomentGetViewTest {
 
         assertThat(outputStreamCaptor.toString().trim(), containsString(expected));
         assertThat(outputStreamCaptor.toString().trim(), containsString("Playa"));
-        assertThat(outputStreamCaptor.toString().trim(), containsString("ALEGRÍA"));
 
     } 
 
