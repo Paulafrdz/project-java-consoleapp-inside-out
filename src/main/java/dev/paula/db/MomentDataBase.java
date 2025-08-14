@@ -13,14 +13,17 @@ public class MomentDataBase implements InterfaceDatabase{
         this.moments = new ArrayList<>();
     }
 
+    @Override
     public void store(Moment moment){
         moments.add(moment);
     }
 
+    @Override
     public List<Moment> getAll() {
         return moments;
     }
-
+    
+    @Override
     public void deleteById(int id) {
         moments.removeIf(moment -> moment.getId() == id);
     }
