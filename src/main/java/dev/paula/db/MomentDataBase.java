@@ -3,10 +3,10 @@ package dev.paula.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.paula.contracts.InterfaceDatabase;
+import dev.paula.contracts.InterfaceDataBase;
 import dev.paula.models.Moment;
 
-public class MomentDataBase implements InterfaceDatabase{
+public class MomentDataBase implements InterfaceDataBase{
     private List<Moment> moments;
 
     public MomentDataBase(){
