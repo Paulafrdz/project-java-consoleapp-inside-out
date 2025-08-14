@@ -10,6 +10,7 @@ import dev.paula.repository.MomentRepository;
 import dev.paula.singletons.MomentRepositorySingleton;
 import dev.paula.dtos.MomentDTOResponse;
 import dev.paula.view.MomentGetView;
+import dev.paula.models.Emotion;
 
 public class MomentController {
     
@@ -19,6 +20,7 @@ public class MomentController {
         this.repository = MomentRepositorySingleton.getInstance();
     }
 
+    
     public void StoreMoment(MomentDTO momentDTO){
         Moment momentToSave = MomentMapper.toEntity(momentDTO);
         repository.StoreMoment(momentToSave);
@@ -39,4 +41,13 @@ public class MomentController {
         repository.deleteMoment(id);
         System.out.println("Momento vivído eliminado correctamente.");
     }
+
+    public List<MomentDTOResponse> getMomentByEmotion(Emotion emotion){
+        List<MomentDTOResponse> out = new ArrayList<>();
+        for (Moment m : repository.findByEmotions(emotion)) {
+            out.add(MomentMapper.toResponse(m));
+        }
+        return out;
+    }
 }
+

@@ -1,5 +1,6 @@
 package dev.paula.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dev.paula.contracts.InterfaceDataBase;
@@ -27,4 +28,13 @@ public class MomentRepository {
     public void deleteMoment(int id) {
         db.deleteById(id);
     }
+
+    public List<Moment> findByEmotions(Emotion emotion){
+        List<Moment> result = new ArrayList<>();
+        for (Moment m : db.getAll()) {
+            if (m.getEmotion() == emotion ) result.add(m);
+        }
+        return result;
+    }
+   
 }
