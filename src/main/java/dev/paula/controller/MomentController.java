@@ -31,7 +31,7 @@ public class MomentController {
         List<Moment> moments = repository.getAllMoments();
 
         for (Moment moment : moments) {
-            MomentsDTO.add(new MomentDTOResponse(moment.getId(), moment.getTitle(), moment.getDescription(), moment.getEmotion(), moment.getdate()));
+            MomentsDTO.add(new MomentDTOResponse(moment.getId(), moment.getTitle(), moment.getDescription(), moment.getEmotion(), moment.getDate()));
         }
         MomentGetView.printAllMoments(MomentsDTO);
 
@@ -45,6 +45,14 @@ public class MomentController {
     public List<MomentDTOResponse> getMomentByEmotion(Emotion emotion){
         List<MomentDTOResponse> out = new ArrayList<>();
         for (Moment m : repository.findByEmotions(emotion)) {
+            out.add(MomentMapper.toResponse(m));
+        }
+        return out;
+    }
+
+    public List<MomentDTOResponse> getMomentsByDate(int month){
+        List<MomentDTOResponse> out = new ArrayList<>();
+        for (Moment m : repository.getMomentsByDate(month)) {
             out.add(MomentMapper.toResponse(m));
         }
         return out;

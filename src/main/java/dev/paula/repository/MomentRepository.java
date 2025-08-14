@@ -1,6 +1,7 @@
 package dev.paula.repository;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import dev.paula.contracts.InterfaceDataBase;
@@ -36,5 +37,21 @@ public class MomentRepository {
         }
         return result;
     }
+
+   public List<Moment> getMomentsByDate(int month) {
+        List<Moment> filtered = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+
+        for (Moment moment : db.getAll()) {
+            calendar.setTime(moment.getDate());
+
+            if (calendar.get(Calendar.MONTH) + 1 == month){
+                filtered.add(moment); 
+            }
+        }
+        return filtered;
+    }
+
+
    
 }

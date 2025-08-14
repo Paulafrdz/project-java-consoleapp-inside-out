@@ -12,6 +12,6 @@ public class MomentMapper {
         return moment;
     }
     public static MomentDTOResponse toResponse(Moment m){
-        return new MomentDTOResponse(m.getId(), m.getTitle(), m.getDescription(), m.getEmotion(), m.getdate());
+        return new MomentDTOResponse(m.getId(), m.getTitle(), m.getDescription(), m.getEmotion(), m.getDate());
     }
 }

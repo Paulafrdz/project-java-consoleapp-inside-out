@@ -14,6 +14,8 @@ public class MomentFilterView extends View{
         int choice = SCANNER.nextInt();;
 
          if (choice == 1) MomentFilterEmotionView.filterByEmotion();
+         if (choice == 2) MomentFilterDateView.filterByDate();
+
     }
     
 }

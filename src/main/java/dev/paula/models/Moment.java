@@ -40,7 +40,7 @@ public class Moment {
         return emotion;
     }
 
-    public Date getdate() {
+    public Date getDate() {
         return date;
     }
 
