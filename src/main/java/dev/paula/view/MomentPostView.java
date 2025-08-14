@@ -64,6 +64,8 @@ public class MomentPostView extends View{
         System.out.println("Momento vivído añadido correctamente.");
 
         HomeView.printMenu();
+
+        
     }
     
     
