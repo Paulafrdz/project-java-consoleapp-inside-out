@@ -51,7 +51,13 @@ public class MomentRepository {
         }
         return filtered;
     }
-
-
+    
+    public List<Moment> findByMood(Mood mood){
+        List<Moment> result = new ArrayList<>();
+        for (Moment m : db.getAll()) {
+            if (m.getMood() == mood ) result.add(m);
+        }
+        return result;
+    }
    
 }

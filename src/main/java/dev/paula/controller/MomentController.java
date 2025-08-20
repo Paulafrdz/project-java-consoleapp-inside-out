@@ -11,6 +11,7 @@ import dev.paula.singletons.MomentRepositorySingleton;
 import dev.paula.dtos.MomentDTOResponse;
 import dev.paula.view.MomentGetView;
 import dev.paula.models.Emotion;
+import dev.paula.models.Mood;
 
 public class MomentController {
     
@@ -53,6 +54,14 @@ public class MomentController {
     public List<MomentDTOResponse> getMomentsByDate(int month){
         List<MomentDTOResponse> out = new ArrayList<>();
         for (Moment m : repository.getMomentsByDate(month)) {
+            out.add(MomentMapper.toResponse(m));
+        }
+        return out;
+    }
+
+    public List<MomentDTOResponse> getMomentByMood(Mood mood){
+        List<MomentDTOResponse> out = new ArrayList<>();
+        for (Moment m : repository.findByMood(mood)) {
             out.add(MomentMapper.toResponse(m));
         }
         return out;

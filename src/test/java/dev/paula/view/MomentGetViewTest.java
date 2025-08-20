@@ -46,7 +46,8 @@ class MomentGetViewTest {
             "un dia paseando por la playa",
             Emotion.ALEGRIA,
             new Date(),
-            Mood.BUENO
+            Mood.BUENA
+            
         ));
 
         // When HomeView.printMenu() is called, do nothing
