@@ -78,6 +78,6 @@ public class Moment {
     @Override
     public String toString() {
         return "ID: " + id + ", Título: " + title + ", Emoción: " + emotion.getnumberEmotion() + 
-               ", Fecha: " + date + ", Descripción: " + description + ", Experiencia: " + mood;
+               ", Fecha: " + date + ", Descripción: " + description + ", Momento: " + mood;
     }
 }

@@ -2,8 +2,8 @@ package dev.paula.models;
 
 public enum Mood {
     
-    BUENO(1),
-    MALO(2);
+    BUENA(1),
+    MALA(2);
 
     private int numberMood;
     public int getnumberMood() {

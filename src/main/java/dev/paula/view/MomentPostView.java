@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import dev.paula.dtos.MomentDTO;
 import dev.paula.models.Emotion;
+import dev.paula.models.Mood;
 import dev.paula.controller.MomentController;
 import dev.paula.singletons.MomentControllerSingleton;
 
@@ -58,7 +59,18 @@ public class MomentPostView extends View{
 
         Emotion emotion = Emotion.values()[numberEmotion - 1];
 
-        MomentDTO moment = new MomentDTO(0, title, description, emotion, date);
+        String textMood = """
+                Seleccione si el momento ha sido bueno o malo:
+                1. Bueno
+                2. Malo
+                """;
+
+        System.out.println(textMood);
+        int moodNumber = SCANNER.nextInt();
+
+        Mood mood = Mood.values()[moodNumber - 1];
+
+        MomentDTO moment = new MomentDTO(0, title, description, emotion, date, mood);
         CONTROLLER.StoreMoment(moment);
 
         System.out.println("Momento vivído añadido correctamente.");

@@ -31,7 +31,7 @@ public class MomentController {
         List<Moment> moments = repository.getAllMoments();
 
         for (Moment moment : moments) {
-            MomentsDTO.add(new MomentDTOResponse(moment.getId(), moment.getTitle(), moment.getDescription(), moment.getEmotion(), moment.getDate()));
+            MomentsDTO.add(new MomentDTOResponse(moment.getId(), moment.getTitle(), moment.getDescription(), moment.getEmotion(), moment.getDate(), moment.getMood()));
         }
         MomentGetView.printAllMoments(MomentsDTO);
 

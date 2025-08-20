@@ -14,7 +14,7 @@ public class MomentGetView extends View{
 
         System.out.print("Lista de momentos vividos: \n");
         for (MomentDTOResponse moment : moments){
-            System.out.println(moment.id() + " Ocurrio el: " + moment.date() + " Título: " + moment.title() + " Descripción: " + moment.description() + " Emoción: " + moment.emotion());
+            System.out.println(moment.id() + " Ocurrio el: " + moment.date() + " Título: " + moment.title() + " Descripción: " + moment.description() + " Emoción: " + moment.emotion() + " Momento " + moment.mood());
         }
        
         HomeView.printMenu();

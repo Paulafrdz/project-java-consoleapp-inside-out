@@ -13,6 +13,8 @@ import java.util.List;
 
 import dev.paula.dtos.MomentDTOResponse;
 import dev.paula.models.Emotion;
+import dev.paula.models.Mood;
+
 import java.util.Date;
 
 import org.junit.jupiter.api.AfterEach;
@@ -43,7 +45,8 @@ class MomentGetViewTest {
             "Playa",
             "un dia paseando por la playa",
             Emotion.ALEGRIA,
-            new Date()
+            new Date(),
+            Mood.BUENO
         ));
 
         // When HomeView.printMenu() is called, do nothing
