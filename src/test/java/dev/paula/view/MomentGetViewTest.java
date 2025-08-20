@@ -46,7 +46,7 @@ class MomentGetViewTest {
             "un dia paseando por la playa",
             Emotion.ALEGRIA,
             new Date(),
-            Mood.BUENA
+            Mood.BUENO
             
         ));
 
