@@ -1,5 +1,7 @@
 package dev.paula.view;
 
+import java.util.Scanner;
+
 import dev.paula.controller.MomentController;
 import dev.paula.singletons.MomentControllerSingleton;
 
@@ -22,17 +24,18 @@ public class HomeView extends View{
 
         System.out.print(text);
 
-        if (TEST_MODE) {
-        return; // No pedimos input en modo test
-        }
-
         int option = SCANNER.nextInt();
+
 
         if (option == 1) MomentPostView.printStoreMenu();
         if (option == 2) CONTROLLER.getAllMoments();
         if (option == 3) MomentDeleteView.printDeleteMenu();
         if (option == 4) MomentFilterView.printFilterMenu();
+        if (option == 5); System.out.println("¡Hasta la próxima! 👋");
 
+    }
+    public static Scanner getSCANNER() {
+        return SCANNER;
     }
     
 }
