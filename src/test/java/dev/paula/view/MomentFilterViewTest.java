@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,6 +31,26 @@ public class MomentFilterViewTest {
         mockedPostView = mockStatic(MomentFilterEmotionView.class);
         System.setOut(new PrintStream(outputStreamCaptor));
     }
+
+    @Test
+    void givenOption1_whenPrintFilterMenu_thenCallsFilterByEmotion() {
+        // arrange
+        String input = "1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        View.SCANNER = new Scanner(System.in);
+
+        // act
+        MomentFilterView.printFilterMenu();
+
+        // assert (verifica salida)
+        String output = outputStreamCaptor.toString().replace("\r", "");
+        assertThat(output, containsString("Ingrese una opción:"));
+
+        // assert (verifica que se llamó al método mockeado)
+        mockedPostView.verify(() -> MomentFilterEmotionView.filterByEmotion(), times(1));
+    }
+
+    
 
     @Test
     void testPrintMenu_SelectOption1_Mocking(){
