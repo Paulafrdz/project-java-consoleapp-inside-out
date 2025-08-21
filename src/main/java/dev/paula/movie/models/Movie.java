@@ -31,7 +31,7 @@ public class Movie {
         this.imdbId = imdbId;
     }
 
-    public String getname() { 
+    public String getName() { 
         return name; 
     }
 
