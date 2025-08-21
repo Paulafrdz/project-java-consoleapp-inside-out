@@ -1,24 +1,25 @@
 package dev.paula.movie.vo;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ShortInfoVO {
     
     private String name;
-    private String[] genre;
-    private String releaseDate;
+    private List<String> genres;
+    private String releaseYear;
 
 
     public String getName() {
         return name;
     }
 
-    public String[] getGenre() {
-        return genre;
+    public  List<String> getGenres() {
+        return genres;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getreleaseYear() {
+        return releaseYear;
     }
 
 
@@ -37,10 +38,10 @@ public class ShortInfoVO {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (releaseDate == null) {
-            if (other.releaseDate != null)
+        if (releaseYear == null) {
+            if (other.releaseYear != null)
                 return false;
-        } if (!Arrays.equals(genre, other.genre))
+        } if (Arrays.equals(genres, other.genres))
             return false;
         return true;
     }   
