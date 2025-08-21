@@ -16,7 +16,8 @@ public class MovieCSVRepository {
         for(Movie movie : movies) {
                 writer.append(movie.getName());
                 writer.append(",");
-                writer.append(String.join("|", movie.getGenres()));
+                String genres = String.join("|", movie.getGenre());
+                writer.append(genres);
                 writer.append(",");
                 writer.append(movie.getEmotion().name());
                 writer.append(",");

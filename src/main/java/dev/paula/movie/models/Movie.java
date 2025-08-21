@@ -1,23 +1,20 @@
 package dev.paula.movie.models;
 
-
-import java.util.List;
-
 import dev.paula.models.Emotion;
 
 public class Movie {
     
     private int imdbId;
     private String name;
-    private List<String> genres;
+    private String[] genre;
     private Emotion emotion;
     private String releaseYear;
     private String createdAt;
 
-    public Movie(int imdbId, String name, List<String> genres, Emotion emotion, String releaseYear, String createdAt) {
+    public Movie(int imdbId, String name, String[] genre, Emotion emotion, String releaseYear, String createdAt) {
         this.imdbId = imdbId;
         this.name = name;
-        this.genres = genres;
+        this.genre = genre;
         this.emotion = emotion;
         this.releaseYear = releaseYear;
         this.createdAt = createdAt;
@@ -39,12 +36,12 @@ public class Movie {
         this.name = name;
     }
 
-    public List<String> getGenres() { 
-        return genres; 
+    public String[] getGenre() { 
+        return genre; 
     }
 
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
+    public void setGenre(String[] genre) {
+        this.genre = genre;
     }
 
     public Emotion getEmotion() { 
