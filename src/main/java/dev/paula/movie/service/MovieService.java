@@ -13,9 +13,12 @@ import dev.paula.movie.daos.ApiMovieDAO;
 public class MovieService {
     
     private ApiMovieDAO movieDAO;
+    private final Gson gson;
 
-    public MovieService(ApiMovieDAO movieDAO) {
-        this.movieDAO = movieDAO;
+
+    public MovieService() {
+        this.movieDAO = new ApiMovieDAO();
+        this.gson = new GsonBuilder().create();
     }
 
     public JsonObject getMovieInfo (String imdbId) {
@@ -33,6 +36,24 @@ public class MovieService {
 
         MovieDTO movieDTO = gson.fromJson(movieData, MovieDTO.class);
 
+        return movieDTO;
+    }
+
+    public MovieDTO findMovieByTitle(String title) {
+        String movieData = movieDAO.getMovie(title);
+
+        if (movieData == null) {
+            return null;
+        }
+
+        MovieDTO movieDTO = gson.fromJson(movieData, MovieDTO.class);
+
+        // Check for an API error response
+        if (movieDTO != null && "False".equalsIgnoreCase(movieDTO.getResponse())) {
+            System.err.println("Error from API: " + movieDTO.getError());
+            return null;
+        }
+        
         return movieDTO;
     }
 }

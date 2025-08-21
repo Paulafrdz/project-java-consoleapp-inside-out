@@ -9,15 +9,30 @@ public class Movie {
     private String[] genre;
     private Emotion emotion;
     private String releaseYear;
-    private String createdAt;
+    private String creationDate;
 
-    public Movie(int imdbId, String name, String[] genre, Emotion emotion, String releaseYear, String createdAt) {
+    public Movie(int imdbId, String name, String[] genre, Emotion emotion, String releaseYear, String creationDate) {
         this.imdbId = imdbId;
         this.name = name;
         this.genre = genre;
         this.emotion = emotion;
         this.releaseYear = releaseYear;
-        this.createdAt = createdAt;
+        this.creationDate = creationDate;
+    }
+
+    public String toCSVString() {
+        // Handle the genre array by joining the elements with a comma
+        // The regex `\\s*,\\s*` handles commas with surrounding whitespace
+        String genreString = String.join(",", this.genre); 
+
+        return String.format("%d,\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"",
+            this.imdbId,
+            this.name,
+            genreString,
+            this.emotion.name(), // Assuming Emotion is an enum, use .name() to get its string representation
+            this.releaseYear,
+            this.creationDate
+        );
     }
 
     public int getImdbId() {
@@ -60,11 +75,11 @@ public class Movie {
         this.releaseYear = releaseYear;
     }
 
-    public String getCreatedAt() { 
-        return createdAt; 
+    public String getCreationDate() { 
+        return creationDate; 
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 }

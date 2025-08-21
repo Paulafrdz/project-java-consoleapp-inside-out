@@ -2,12 +2,13 @@ package dev.paula.movie.mappers;
 
 import java.time.LocalDate;
 
+import dev.paula.models.Emotion;
 import dev.paula.movie.dtos.MovieDTO;
 import dev.paula.movie.models.Movie;
 
 public class MovieMapper {
     
-     public static Movie toEntity(MovieDTO dto) {
+     public static Movie toEntity(MovieDTO dto, Emotion emotion, LocalDate creationDate) {
 
         String name = dto.getShortInfo().getName();
         String[] genresArray = dto.getShortInfo().getGenre();
@@ -20,6 +21,6 @@ public class MovieMapper {
         } catch (NumberFormatException e) {
             // Por si el ID no es un número
         }
-        return new Movie(id, name, genresArray, null, releaseYear, LocalDate.now().toString());
+        return new Movie(id, name, genresArray, emotion, releaseYear, LocalDate.now().toString());
     }
 }
