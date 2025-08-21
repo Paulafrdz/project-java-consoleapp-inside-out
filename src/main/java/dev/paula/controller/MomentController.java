@@ -6,6 +6,7 @@ import java.util.List;
 import dev.paula.dtos.MomentDTO;
 import dev.paula.mappers.MomentMapper;
 import dev.paula.models.Moment;
+import dev.paula.repository.MomentCSVRepository;
 import dev.paula.repository.MomentRepository;
 import dev.paula.singletons.MomentRepositorySingleton;
 import dev.paula.dtos.MomentDTOResponse;
@@ -65,6 +66,11 @@ public class MomentController {
             out.add(MomentMapper.toResponse(m));
         }
         return out;
+    }
+
+    public void exportAllMoments(String fileName) {
+        List <Moment> allMoments = repository.getAllMoments();
+        MomentCSVRepository.exportMomentCSV(allMoments, fileName);
     }
 }
 
