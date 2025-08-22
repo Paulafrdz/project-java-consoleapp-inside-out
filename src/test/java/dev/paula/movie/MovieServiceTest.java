@@ -3,14 +3,12 @@ package dev.paula.movie;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.google.gson.JsonObject;
 
-import dev.paula.movie.daos.ApiMovieDAO;
 import dev.paula.movie.dtos.MovieDTO;
 import dev.paula.movie.service.MovieService;
 
@@ -20,7 +18,7 @@ public class MovieServiceTest {
 
     @BeforeEach
     void setUp() {
-        this.movieService = new MovieService(new ApiMovieDAO());
+        this.movieService = new MovieService();
     }
 
     @Test

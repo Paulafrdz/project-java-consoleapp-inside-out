@@ -16,8 +16,8 @@ public class MovieService {
     private final Gson gson;
 
 
-    public MovieService(ApiMovieDAO movieDAO) {
-        this.movieDAO = movieDAO;
+    public MovieService() {
+        this.movieDAO = new ApiMovieDAO();
         this.gson = new GsonBuilder().create();
     }
 
