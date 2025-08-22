@@ -1,3 +1,59 @@
+# 📖 Project Inside Out - Mi Diario
+
+<img width="392" height="198" alt="image" src="https://github.com/user-attachments/assets/594ab907-9f1e-4551-a63a-7c2036661082" />
+
+
+## 🎯 Descripción del Proyecto
+**Mi Diario** es una aplicación de consola desarrollada en Java que permite a los usuarios gestionar sus momentos vividos y películas vistas, asociándolos con emociones específicas. Inspirada en la película "Inside Out", esta aplicación ayuda a los usuarios a llevar un registro emocional de sus experiencias.
+
+
+## 📋 Funcionalidades Principales
+**🌟 Gestión de Momentos**
+- ✅ Crear momentos con título, descripción, fecha y emoción
+- ✅ Visualizar todos los momentos registrados
+- ✅ Eliminar momentos específicos por ID
+- ✅ Filtrar momentos por emoción o fecha
+- ✅ Clasificar momentos como buenos o malos
+- ✅ Exportar a archivo CSV
+
+
+**🎬 Gestión de Películas**
+- ✅ Registrar películas mediante integración con API de IMDb
+- ✅ Asociar emociones a las películas vistas
+- ✅ Guardar automáticamente en archivo CSV
+
+
+**🎭 Emociones Disponibles**
+
+| ID | Emoción | ID | Emoción |
+| -- | ------- | -- | ------- |
+| 1  | Alegría | 6  | Ansiedad |
+| 2  | Tristeza | 7  | Envidia |
+| 3  | Ira | 8  | Vergüenza |
+| 4  | Asco | 9  | Aburrimiento |
+| 5  | Miedo | 10 | Nostalgia |
+
+
+## 🚀 Instalación y Ejecución
+**Instalar dependencias con Maven**
+El proyecto utiliza Gson para el manejo de JSON. Asegúrate de que tu pom.xml contenga la siguiente dependencia:
+```
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.13.1</version>
+</dependency>
+```
+
+
+## 🌐 APIs Utilizadas
+
+- IMDb API: https://imdb.iamidiotareyoutoo.com/search?tt=
+- Método: GET
+- Parámetro: ID de IMDb (ejemplo: tt0118583)
+- Respuesta: JSON con información completa de la película
+
+
 ## Diagram
 ```mermaid
 
@@ -376,3 +432,5 @@ classDiagram
     HomeView --> MoviePostView : calls
 ```
 
+## 👥 Autores
+**Paula** - Desarrollo principal - @dev.paula
