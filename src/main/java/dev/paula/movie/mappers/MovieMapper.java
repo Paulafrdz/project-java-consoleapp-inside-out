@@ -8,11 +8,11 @@ import dev.paula.movie.models.Movie;
 
 public class MovieMapper {
     
-     public static Movie toEntity(MovieDTO dto, Emotion emotion, LocalDate creationDate) {
+     public static Movie toEntity(MovieDTO dto, Emotion emotion) {
 
         String name = dto.getShortInfo().getName();
         String[] genresArray = dto.getShortInfo().getGenre();
-        String releaseYear = dto.getShortInfo().getReleaseYear();
+        String datePublished = dto.getShortInfo().getDatePublished();
         String imdbId = dto.getImdbId();
         
         int id = 0;
@@ -21,6 +21,6 @@ public class MovieMapper {
         } catch (NumberFormatException e) {
             // Por si el ID no es un número
         }
-        return new Movie(id, name, genresArray, emotion, releaseYear, LocalDate.now().toString());
+        return new Movie(id, name, genresArray, emotion, datePublished, LocalDate.now().toString());
     }
 }

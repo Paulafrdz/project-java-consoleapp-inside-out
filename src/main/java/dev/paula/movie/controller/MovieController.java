@@ -1,8 +1,5 @@
 package dev.paula.movie.controller;
 
-import java.time.LocalDate;
-
-
 import dev.paula.models.Emotion;
 import dev.paula.movie.dtos.MovieDTO;
 import dev.paula.movie.mappers.MovieMapper;
@@ -21,12 +18,11 @@ public class MovieController {
         this.apiService = new MovieService();
     }
 
-    public void addMovie(String name, Emotion emotion, String createdDate) {
+    public void addMovie(String name, Emotion emotion) {
         MovieDTO movieDTO = apiService.findMovieByTitle(name);
 
         if(movieDTO != null) {
-            LocalDate creationDate = LocalDate.now();
-            Movie movie = MovieMapper.toEntity(movieDTO, emotion, creationDate);
+            Movie movie = MovieMapper.toEntity(movieDTO, emotion);
 
             repository.save(movie);
             System.out.print("Película añadida con éxito!");

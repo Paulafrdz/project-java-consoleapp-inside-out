@@ -24,7 +24,7 @@ public class MovieCSVRepository {
                 writer.append(",");
                 writer.append(movie.getEmotion().name());
                 writer.append(",");
-                writer.append(movie.getReleaseYear());
+                writer.append(movie.getDatePublished());
                 writer.append(",");
                 writer.append(movie.getCreationDate());
                 writer.append("\n");

@@ -8,15 +8,15 @@ public class Movie {
     private String name;
     private String[] genre;
     private Emotion emotion;
-    private String releaseYear;
+    private String datePublished;
     private String creationDate;
 
-    public Movie(int imdbId, String name, String[] genre, Emotion emotion, String releaseYear, String creationDate) {
+    public Movie(int imdbId, String name, String[] genre, Emotion emotion, String datePublished, String creationDate) {
         this.imdbId = imdbId;
         this.name = name;
         this.genre = genre;
         this.emotion = emotion;
-        this.releaseYear = releaseYear;
+        this.datePublished = datePublished;
         this.creationDate = creationDate;
     }
 
@@ -30,7 +30,7 @@ public class Movie {
             this.name,
             genreString,
             this.emotion.name(), // Assuming Emotion is an enum, use .name() to get its string representation
-            this.releaseYear,
+            this.datePublished,
             this.creationDate
         );
     }
@@ -67,12 +67,12 @@ public class Movie {
         this.emotion = emotion;
     }
 
-    public String getReleaseYear() { 
-        return releaseYear;
+    public String getDatePublished() { 
+        return datePublished;
     }
 
-    public void setReleaseYear(String releaseYear) {
-        this.releaseYear = releaseYear;
+    public void setDatePublished(String datePublished) {
+        this.datePublished = datePublished;
     }
 
     public String getCreationDate() { 

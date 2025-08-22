@@ -7,7 +7,7 @@ public class ShortInfoVO {
     
     private String name;
     private String[] genre;
-    private String releaseYear;
+    private String datePublished;
 
 
     public String getName() {
@@ -18,8 +18,8 @@ public class ShortInfoVO {
         return genre;
     }
 
-    public String getReleaseYear() {
-        return releaseYear;
+    public String getDatePublished() {
+        return datePublished;
     }
 
 
@@ -38,8 +38,8 @@ public class ShortInfoVO {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (releaseYear == null) {
-            if (other.releaseYear != null)
+        if (datePublished == null) {
+            if (other.datePublished != null)
                 return false;
         } if (!Arrays.equals(genre, other.genre))
             return false;
@@ -48,6 +48,6 @@ public class ShortInfoVO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, genre, releaseYear);
+        return Objects.hash(name, genre, datePublished);
     }
 }
