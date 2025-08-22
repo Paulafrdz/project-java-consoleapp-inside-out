@@ -1,138 +1,378 @@
-Project Inside Out
-Instrucciones
-Se os ha encargado la creación de una aplicación de consola con la cual el usuario podrá gestionar momentos vividos, Mi Diario. Cada momento tendrá una emoción asignada junto con la fecha de cuando ocurrio.
+## Diagram
+```mermaid
 
-Cada momento vivído tendrá un identificador, un título, una descripción, una emoción, fecha del momento, fecha de creación, fecha de modificación.
+classDiagram
+    %% ===== MAIN APPLICATION =====
+    class App {
+        -App()
+        +main(String[] args)$ void
+    }
 
-Listado de emociones:
+    %% ===== ENUMS =====
+    class Emotion {
+        <<enumeration>>
+        ALEGRIA(1)
+        TRISTEZA(2)
+        IRA(3)
+        ASCO(4)
+        MIEDO(5)
+        ANSIEDAD(6)
+        ENVIDIA(7)
+        VERGUENZA(8)
+        ABURRIMIENTO(9)
+        NOSTALGIA(10)
+        -int numberEmotion
+        +getnumberEmotion() int
+    }
 
-Alegría
-Tristeza
-Ira
-Asco
-Miedo
-Ansiedad
-Envidia
-Vergüenza
-Aburrimiento
-Nostalgia
-Por cada historia de usuario se deberán redactar los criterios de aceptación.
+    class Mood {
+        <<enumeration>>
+        BUENO(1)
+        MALO(2)
+        -int numberMood
+        +getnumberMood() int
+    }
 
-Historias de usuario
-COMO usuario QUIERO añadir un momento vivido PARA poder visualisarlo cuando lo necesite recordar
+    %% ===== MODELS =====
+    class Moment {
+        -int nextId$
+        -int id
+        -LocalDateTime createdAt
+        -LocalDateTime modifiedAt
+        -Date date
+        -String title
+        -String description
+        -Emotion emotion
+        -Mood mood
+        +Moment(int, String, String, Emotion, Date, Mood)
+        +getId() int
+        +getTitle() String
+        +getDescription() String
+        +getEmotion() Emotion
+        +getDate() Date
+        +getCreatedAt() LocalDateTime
+        +getModifiedAt() LocalDateTime
+        +getMood() Mood
+        +setTitle(String) void
+        +setDescription(String) void
+        +setEmotion(Emotion) void
+        +toString() String
+    }
 
-COMO usuario QUIERO recuperar la lista de lo momentos vividos registrados PARA poder repasarlos
+    %% ===== DTOs =====
+    class MomentDTO {
+        <<record>>
+        +int id
+        +String title
+        +String description
+        +Emotion emotion
+        +Date date
+        +Mood mood
+    }
 
-COMO usuario QUIERO suprimir un momento vivido PARA evitar duplicados y mantener la lista de momentos organizada
+    class MomentDTOResponse {
+        <<record>>
+        +int id
+        +String title
+        +String description
+        +Emotion emotion
+        +Date date
+        +Mood mood
+    }
 
-COMO usuario QUIERO obtener los momentos vividos según su emoción PARA poder visualizarlos
+    %% ===== MAPPERS =====
+    class MomentMapper {
+        +toEntity(MomentDTO) Moment$
+        +toResponse(Moment) MomentDTOResponse$
+    }
 
-COMO usuario QUIERO obtener los momentos vividos en un mes determinado
+    %% ===== INTERFACES =====
+    class InterfaceDataBase {
+        <<interface>>
+        +store(Moment) void
+        +getAll() List~Moment~
+        +deleteById(int) void
+    }
 
-COMO usuario QUIERO salir del programa PARA poder iniciar otro
+    %% ===== DATABASE =====
+    class MomentDataBase {
+        -List~Moment~ moments
+        +MomentDataBase()
+        +store(Moment) void
+        +getAll() List~Moment~
+        +deleteById(int) void
+    }
 
-Ejemplo de interacción con la consola
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 1
+    %% ===== REPOSITORY =====
+    class MomentRepository {
+        -InterfaceDataBase db
+        +MomentRepository()
+        +StoreMoment(Moment) void
+        +getAllMoments() List~Moment~
+        +deleteMoment(int) void
+        +findByEmotions(Emotion) List~Moment~
+        +getMomentsByDate(int) List~Moment~
+        +findByMood(Mood) List~Moment~
+    }
 
-Ingrese el título: Un día en el parque de atracciones
-Ingresa la fecha (dd/mm/year): 01/05/2024
-Ingrese la descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus.
+    class MomentCSVRepository {
+        +exportMomentCSV(List~Moment~, String) void$
+    }
 
-Selecciona una emoción:
-1. Alegría
-2. Tristeza
-3. Ira
-4. Asco
-5. Miedo
-6. Ansiedad
-7. Envidia
-8. Vergüenza
-9. Aburrimiento
-10. Nostalgia
-Ingrese su opción: 1
-Momento vivído añadido correctamente.
+    %% ===== CONTROLLERS =====
+    class HomeController {
+        +HomeController()
+        +index() void
+    }
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 2
+    class MomentController {
+        -MomentRepository repository
+        +MomentController()
+        +StoreMoment(MomentDTO) void
+        +getAllMoments() void
+        +deleteMoment(int) void
+        +getMomentByEmotion(Emotion) List~MomentDTOResponse~
+        +getMomentsByDate(int) List~MomentDTOResponse~
+        +getMomentByMood(Mood) List~MomentDTOResponse~
+        +exportAllMoments(String) void
+    }
 
-Lista de momentos vividos:
-1. Ocurrio el: 01/01/2024. Título: Un día en el parque de atracciones. Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus. Emoción: Alegría
+    %% ===== SINGLETONS =====
+    class MomentControllerSingleton {
+        -MomentController INSTANCE$
+        -MomentControllerSingleton()
+        +getInstance() MomentController$
+    }
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 3
+    class MomentRepositorySingleton {
+        -MomentRepository INSTANCE$
+        -MomentRepositorySingleton()
+        +getInstance() MomentRepository$
+    }
 
-Ingresa el identificador del momento: 1
-Momento vivído eliminado correctamente.
+    %% ===== VIEWS =====
+    class View {
+        #Scanner SCANNER$
+    }
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 4
+    class HomeView {
+        -MomentController CONTROLLER$
+        +printMenu() void$
+        +getSCANNER() Scanner$
+    }
 
-Filtar por ...:
-1. Emoción
-2. Fecha
-Ingrese una opción: 1
+    class MomentPostView {
+        -MomentController CONTROLLER$
+        +printStoreMenu() void$
+    }
 
-Selecciona una emoción:
-1. Alegría
-2. Tristeza
-3. Ira
-4. Asco
-5. Miedo
-6. Ansiedad
-7. Envidia
-8. Vergüenza
-9. Aburrimiento
-10. Nostalgia
-Ingrese su opción: 1
+    class MomentDeleteView {
+        -MomentController CONTROLLER$
+        +printDeleteMenu() void$
+    }
 
-Lista de momentos vividos:
-1. Ocurrio el: 01/01/2024. Título: Un día en el parque de atracciones. Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus. Emoción: Alegría
+    class MomentFilterView {
+        +printFilterMenu() void$
+    }
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 4
+    class MomentFilterEmotionView {
+        -MomentController CONTROLLER$
+        +filterByEmotion() void$
+    }
 
-Filtrar por ...:
-1. Emoción
-2. Fecha
-Ingrese una opción: 2
+    class MomentFilterDateView {
+        -MomentController CONTROLLER$
+        +filterByDate() void$
+    }
 
-Ingrese la fecha (dd/mm/year): 01/01/2024
+    class MomentGetView {
+        +printAllMoments(List~MomentDTOResponse~) void$
+    }
 
-Lista de momentos vividos:
-1. Ocurrio el: 01/01/2024. Título: Un día en el parque de atracciones. Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus. Emoción: Alegría
+    class MomentExportCSVView {
+        -MomentController CONTROLLER$
+        +printExportMenu() void$
+    }
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 5
+    %% ===== MOVIE MODULE =====
+    class Movie {
+        -int imdbId
+        -String name
+        -String[] genre
+        -Emotion emotion
+        -String datePublished
+        -String creationDate
+        +Movie(int, String, String[], Emotion, String, String)
+        +toCSVString() String
+        +getImdbId() int
+        +getName() String
+        +getGenre() String[]
+        +getEmotion() Emotion
+        +getDatePublished() String
+        +getCreationDate() String
+        %% setters...
+    }
 
-Hasta la próxima!!!
+    class MovieDTO {
+        -String imdbId
+        -String response
+        -String error
+        -ShortInfoVO shortInfo
+        +getImdbId() String
+        +getShortInfo() ShortInfoVO
+        +getResponse() String
+        +setResponse(String) void
+        +getError() String
+        +setError(String) void
+    }
+
+    class ShortInfoVO {
+        -String name
+        -String[] genre
+        -String datePublished
+        +getName() String
+        +getGenre() String[]
+        +getDatePublished() String
+        +equals(Object) boolean
+        +hashCode() int
+    }
+
+    class MovieMapper {
+        +toEntity(MovieDTO, Emotion) Movie$
+    }
+
+    class InterfaceApiMoviesDAO {
+        <<interface>>
+        +getMovie(String) String
+    }
+
+    class ApiMovieDAO {
+        -String url
+        +ApiMovieDAO()
+        +getMovie(String) String
+    }
+
+    class MovieService {
+        -ApiMovieDAO movieDAO
+        -Gson gson
+        +MovieService()
+        +getMovieInfo(String) JsonObject
+        +getMovieInfoAndMapToDTO(String) MovieDTO
+        +findMovieByTitle(String) MovieDTO
+    }
+
+    class MovieCSVRepository {
+        -String CSV_FILE$
+        +exportMovieCSV(List~Movie~, String) void$
+        +save(Movie) void
+    }
+
+    class MovieController {
+        -MovieCSVRepository repository
+        -MovieService apiService
+        +MovieController()
+        +addMovie(String, Emotion) void
+    }
+
+    class MovieControllerSingleton {
+        -MovieController INSTANCE$
+        -MovieControllerSingleton()
+        +getInstance() MovieController$
+    }
+
+    class MovieRepositorySingleton {
+        -MovieCSVRepository INSTANCE$
+        -MovieRepositorySingleton()
+        +getInstance() MovieCSVRepository$
+    }
+
+    class MoviePostView {
+        -MovieController movieController$
+        -Scanner SCANNER$
+        +addMovieFromApi() void$
+    }
+
+    %% ===== RELATIONSHIPS =====
+    
+    %% Main relationships
+    App --> HomeController : creates
+    HomeController --> HomeView : uses
+    
+    %% Model relationships
+    Moment --> Emotion : uses
+    Moment --> Mood : uses
+    
+    %% DTO relationships
+    MomentDTO --> Emotion : contains
+    MomentDTO --> Mood : contains
+    MomentDTOResponse --> Emotion : contains
+    MomentDTOResponse --> Mood : contains
+    
+    %% Mapper relationships
+    MomentMapper --> Moment : creates
+    MomentMapper --> MomentDTO : uses
+    MomentMapper --> MomentDTOResponse : creates
+    
+    %% Database relationships
+    MomentDataBase ..|> InterfaceDataBase : implements
+    MomentDataBase --> Moment : stores
+    
+    %% Repository relationships
+    MomentRepository --> InterfaceDataBase : uses
+    MomentRepository --> Moment : manages
+    
+    %% Controller relationships
+    MomentController --> MomentRepository : uses
+    MomentController --> MomentDTO : receives
+    MomentController --> MomentDTOResponse : returns
+    MomentController --> MomentMapper : uses
+    MomentController --> MomentCSVRepository : uses
+    
+    %% Singleton relationships
+    MomentControllerSingleton --> MomentController : provides
+    MomentRepositorySingleton --> MomentRepository : provides
+    
+    %% View inheritance
+    HomeView --|> View : extends
+    MomentPostView --|> View : extends
+    MomentDeleteView --|> View : extends
+    MomentFilterView --|> View : extends
+    MomentFilterEmotionView --|> View : extends
+    MomentFilterDateView --|> View : extends
+    MomentGetView --|> View : extends
+    MomentExportCSVView --|> View : extends
+    MoviePostView --|> View : extends
+    
+    %% View dependencies
+    HomeView --> MomentControllerSingleton : uses
+    MomentPostView --> MomentControllerSingleton : uses
+    MomentDeleteView --> MomentControllerSingleton : uses
+    MomentFilterEmotionView --> MomentControllerSingleton : uses
+    MomentFilterDateView --> MomentControllerSingleton : uses
+    MomentExportCSVView --> MomentControllerSingleton : uses
+    
+    %% Movie module relationships
+    Movie --> Emotion : uses
+    MovieDTO --> ShortInfoVO : contains
+    MovieMapper --> MovieDTO : uses
+    MovieMapper --> Movie : creates
+    MovieMapper --> Emotion : uses
+    
+    ApiMovieDAO ..|> InterfaceApiMoviesDAO : implements
+    MovieService --> ApiMovieDAO : uses
+    MovieService --> MovieDTO : creates
+    
+    MovieController --> MovieCSVRepository : uses
+    MovieController --> MovieService : uses
+    MovieController --> MovieMapper : uses
+    
+    MovieControllerSingleton --> MovieController : provides
+    MovieRepositorySingleton --> MovieCSVRepository : provides
+    
+    MoviePostView --> MovieController : uses
+    MoviePostView --> Emotion : uses
+    
+    %% Cross-module relationships
+    HomeView --> MoviePostView : calls
+```
+
